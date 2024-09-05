@@ -1,0 +1,96 @@
+body {
+    margin: 0;
+    overflow: hidden;
+    background-color: #87CEEB; /* Cielo azul */
+    height: 100vh;
+  }
+  
+  .field {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    background: linear-gradient(to top, #32a852 50%, #87CEEB 50%); /* Césped con cielo */
+  }
+  
+  .sun {
+    position: absolute;
+    bottom: -150px; /* Sol bajo el horizonte */
+    left: 50%;
+    width: 20vw; /* Ajustar tamaño del sol en función del ancho de la ventana */
+    height: 20vw;
+    background-color: #FFD700;
+    border-radius: 50%;
+    transform: translateX(-50%) scale(0.5);
+    transition: transform 3s ease-in-out, bottom 3s ease-in-out;
+  }
+  
+  .sun.appear {
+    bottom: 60%; /* Ajuste para que el sol quede en el cielo, no en el césped */
+    transform: translateX(-50%) scale(1);
+  }
+  
+  .message {
+    position: absolute;
+    top: 10%; /* Ajuste para que el mensaje inicial esté más alto */
+    width: 100%;
+    text-align: center;
+    font-size: 4vw; /* Escalar el tamaño del texto para que sea responsivo */
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  }
+  
+  .romantic-message {
+    position: absolute;
+    top: 40%; /* Subir la frase romántica más alto en la pantalla */
+    width: 100%;
+    text-align: center;
+    font-size: 5vw; /* Tamaño de fuente escalable según la pantalla */
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    transition: opacity 2s ease-in-out;
+  }
+  
+  .romantic-message.show {
+    opacity: 1;
+  }
+  
+  .flower {
+    position: absolute;
+    bottom: 0;
+    width: 10vw; /* Escalar el tamaño de las flores para adaptarse a diferentes pantallas */
+    height: 20vw;
+    transform: scale(0);
+    transition: transform 2s ease-in-out;
+  }
+  
+  .flower img {
+    width: 100%;
+    height: 100%;
+  }
+  
+  .flower.grow {
+    transform: scale(1);
+  }
+  
+  /* Medios responsivos para asegurar que se vea bien en móviles */
+  @media (max-width: 600px) {
+    .message {
+      font-size: 6vw; /* Aumentar el tamaño del texto en pantallas más pequeñas */
+    }
+  
+    .romantic-message {
+      font-size: 7vw; /* Ajustar la frase romántica para móviles */
+    }
+  
+    .sun {
+      width: 25vw;
+      height: 25vw;
+    }
+  
+    .flower {
+      width: 12vw;
+      height: 24vw;
+    }
+  }
+  
