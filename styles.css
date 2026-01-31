@@ -1,54 +1,69 @@
 body {
     margin: 0;
     overflow: hidden;
-    background-color: #87CEEB; /* Cielo azul */
+    background-color: #fbc2eb;
     height: 100vh;
+    font-family: 'Montserrat', sans-serif;
   }
   
   .field {
     position: relative;
     width: 100vw;
     height: 100vh;
-    background: linear-gradient(to top, #32a852 50%, #87CEEB 50%); /* Césped con cielo */
+    background: linear-gradient(135deg, #fbc2eb 0%, #a6c1ee 100%);
+    cursor: crosshair;
   }
   
   .sun {
     position: absolute;
-    bottom: -150px; /* Sol bajo el horizonte */
+    bottom: -150px;
     left: 50%;
-    width: 20vw; /* Ajustar tamaño del sol en función del ancho de la ventana */
+    width: 20vw;
     height: 20vw;
-    background-color: #FFD700;
+    background: radial-gradient(circle, #ffedbc, #ff4d6d);
     border-radius: 50%;
     transform: translateX(-50%) scale(0.5);
+    box-shadow: 0 0 60px rgba(255, 77, 109, 0.8);
     transition: transform 3s ease-in-out, bottom 3s ease-in-out;
+    z-index: 1;
   }
   
   .sun.appear {
-    bottom: 60%; /* Ajuste para que el sol quede en el cielo, no en el césped */
-    transform: translateX(-50%) scale(1);
+    bottom: 65%;
+    transform: translateX(-50%) scale(1.2);
   }
   
   .message {
     position: absolute;
-    top: 10%; /* Ajuste para que el mensaje inicial esté más alto */
+    top: 10%;
     width: 100%;
     text-align: center;
-    font-size: 4vw; /* Escalar el tamaño del texto para que sea responsivo */
+    font-size: 1.5rem;
     color: white;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3);
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    padding: 20px 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.3);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
+    z-index: 10;
   }
   
   .romantic-message {
     position: absolute;
-    top: 40%; /* Subir la frase romántica más alto en la pantalla */
+    top: 25%;
     width: 100%;
     text-align: center;
-    font-size: 5vw; /* Tamaño de fuente escalable según la pantalla */
-    color: white;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    font-size: 6vw;
+    font-family: 'Dancing Script', cursive;
+    color: #ff4d6d;
+    text-shadow: 0 0 15px rgba(255, 255, 255, 0.9), 2px 2px 5px rgba(0, 0, 0, 0.1);
     opacity: 0;
     transition: opacity 2s ease-in-out;
+    z-index: 10;
+    pointer-events: none;
   }
   
   .romantic-message.show {
@@ -57,40 +72,81 @@ body {
   
   .flower {
     position: absolute;
-    bottom: 0;
-    width: 10vw; /* Escalar el tamaño de las flores para adaptarse a diferentes pantallas */
-    height: 20vw;
-    transform: scale(0);
-    transition: transform 2s ease-in-out;
+    width: 12vw;
+    height: auto;
+    transform: translate(-50%, -50%) scale(0) rotate(0deg);
+    transition: transform 1.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    pointer-events: none;
+    z-index: 5;
   }
   
   .flower img {
     width: 100%;
-    height: 100%;
+    height: auto;
+    filter: drop-shadow(0 5px 15px rgba(0,0,0,0.2));
   }
   
   .flower.grow {
-    transform: scale(1);
+    transform: translate(-50%, -50%) scale(1) rotate(var(--rotation));
+  }
+
+  /* Heart element */
+  .heart {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    background-color: #ff4d6d;
+    transform: translate(-50%, -50%) scale(0) rotate(-45deg);
+    transition: transform 1s ease-out;
+    pointer-events: none;
+    z-index: 4;
+  }
+
+  .heart::before,
+  .heart::after {
+    content: "";
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    background-color: #ff4d6d;
+    border-radius: 50%;
+  }
+
+  .heart::before {
+    top: -25px;
+    left: 0;
+  }
+
+  .heart::after {
+    top: 0;
+    left: 25px;
+  }
+
+  .heart.grow {
+    transform: translate(-50%, -50%) scale(var(--scale)) rotate(-45deg);
+    animation: float 4s ease-in-out infinite alternate;
+  }
+
+  @keyframes float {
+    from { transform: translate(-50%, -50%) scale(var(--scale)) rotate(-45deg) translateY(0); }
+    to { transform: translate(-50%, -50%) scale(var(--scale)) rotate(-45deg) translateY(-20px); }
   }
   
-  /* Medios responsivos para asegurar que se vea bien en móviles */
   @media (max-width: 600px) {
     .message {
-      font-size: 6vw; /* Aumentar el tamaño del texto en pantallas más pequeñas */
+      font-size: 1.2rem;
     }
   
     .romantic-message {
-      font-size: 7vw; /* Ajustar la frase romántica para móviles */
+      font-size: 10vw;
     }
   
     .sun {
-      width: 25vw;
-      height: 25vw;
+      width: 35vw;
+      height: 35vw;
     }
   
     .flower {
-      width: 12vw;
-      height: 24vw;
+      width: 25vw;
     }
   }
-  
